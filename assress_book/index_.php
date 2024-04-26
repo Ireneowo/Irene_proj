@@ -1,3 +1,9 @@
+<?php
+$title = '首頁';
+$pageName = 'index_';
+?>
+
+
 <?php include __DIR__ . '/parts/html-head.php' ?>
 <?php include __DIR__ . '/parts/navbar.php' ?>
 

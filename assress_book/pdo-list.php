@@ -1,4 +1,9 @@
 <?php
+$title = '通訊錄列表';
+$pageName = 'pdo-list';
+?>
+
+<?php
 
 require __DIR__ . '/../config/04-16_pdo-content.php';
 
@@ -14,20 +19,20 @@ $t_sql = "SELECT COUNT(sid) FROM address_book";
 # 總筆數
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
-# 總頁數
-$totalPages = ceil($totalRows / $perPage);
-if ($page > $totalPages) {
-    header("Location:?page={$totalPages}");
-    exit; // 結束這支程式
-}
-
 // SELECT * FROM `address_book` ORDER BY sid DESC LIMIT 0, 20
 // SELECT * FROM `address_book` ORDER BY sid DESC LIMIT 20, 20
 // SELECT * FROM `address_book` ORDER BY sid DESC LIMIT 40, 20
 // SELECT * FROM `address_book` ORDER BY sid DESC LIMIT 60, 20
 
+$totalPages = '';
 $rows = [];
 if ($totalRows) {
+    # 總頁數
+    $totalPages = ceil($totalRows / $perPage);
+    if ($page > $totalPages) {
+        header("Location:?page={$totalPages}");
+        exit; // 結束這支程式
+    }
     # 取得分頁資料
     $sql = sprintf(
         "SELECT * FROM `address_book` ORDER BY sid DESC LIMIT %s, %s",
@@ -52,11 +57,32 @@ if ($totalRows) {
         <div class="col">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <?php for ($i = 1; $i <= 10; $i++): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                        </li>
-                    <?php endfor ?>
+                    <li class="page-item ">
+                        <a class="page-link" href="#">
+                            <i class="fa-solid fa-angles-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item ">
+                        <a class="page-link" href="#">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </a>
+                    </li>
+                    <?php for ($i = $page - 5; $i <= $page + 5; $i++):
+                        if ($i >= 1 and $i <= $totalPages): ?>
+                            <li class="page-item <?= $page == $i ? 'active' : '' ?> ">
+                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                            </li>
+                        <?php endif; endfor ?>
+                    <li class="page-item">
+                        <a class="page-link" href="#">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item ">
+                        <a class="page-link" href="#">
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
