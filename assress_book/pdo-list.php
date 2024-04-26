@@ -97,6 +97,8 @@ if ($totalRows) {
                 <th scope="col">手機</th>
                 <th scope="col">生日</th>
                 <th scope="col">地址</th>
+                <th scope="col"><i class="fa-solid fa-trash"></i></th>
+                <th scope="col"><i class="fa-solid fa-pen-to-square"></i></th>
             </tr>
         </thead>
         <tbody>
@@ -107,7 +109,15 @@ if ($totalRows) {
                     <td><?= $r['email'] ?></td>
                     <td><?= $r['mobile'] ?></td>
                     <td><?= $r['birthday'] ?></td>
-                    <td><?= $r['address'] ?></td>
+                    <td><?= htmlentities($r['address']) ?></td>
+                    <td><a href="delete.php?sid=<?= $r['sid'] ?>">
+                            <i class="fa-solid fa-trash text-danger"></i>
+                        </a></td>
+                    <td>
+                        <a href="edit.php?sid=<?= $r['sid'] ?>">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

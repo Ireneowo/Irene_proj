@@ -7,9 +7,15 @@ $output = [
   'success' => false, # 有沒有新增成功
   'bodyData' => $_POST,
   'newId' => 0,
-
-
 ];
+
+$birthday = strtotime($_POST['birthday']);
+if ($birthday === false) {
+  $birthday = null;
+} else {
+  $birthday = date('Y-m-d', $birthday);
+}
+
 
 // TODO: 欄位資料檢查
 if (!isset($_POST['name'])) {
@@ -49,7 +55,7 @@ $stmt->execute([
   $_POST['name'],
   $_POST['email'],
   $_POST['mobile'],
-  $_POST['birthday'],
+  $birthday,
   $_POST['address']
 ]);
 
