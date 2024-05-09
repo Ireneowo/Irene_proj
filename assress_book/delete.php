@@ -7,6 +7,7 @@ if ($sid < 1) {
 }
 $sql = "DELETE FROM `address_book` WHERE sid=$sid";
 $pdo->query($sql);
+
 # $_SERVER['HTTP_REFERER']: 從哪個頁面連過來的
 $comeFrom = 'pdo-list.php';
 if (isset($_SERVER['HTTP_REFERER'])) {

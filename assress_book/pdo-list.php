@@ -110,7 +110,7 @@ if ($totalRows) {
                     <td><?= $r['mobile'] ?></td>
                     <td><?= $r['birthday'] ?></td>
                     <td><?= htmlentities($r['address']) ?></td>
-                    <td><a href="delete.php?sid=<?= $r['sid'] ?>">
+                    <td><a href="delete.php?sid=<?= $r['sid'] ?>" onclick="return confirm('是否要刪除編號為<?= $r['sid'] ?>的資料')">
                             <i class="fa-solid fa-trash text-danger"></i>
                         </a></td>
                     <td>

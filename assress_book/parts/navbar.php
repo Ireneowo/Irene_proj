@@ -25,6 +25,14 @@
                         <a class="nav-link <?= $pageName == 'add' ? 'active' : '' ?>" href="add.php">新增</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link <?= $pageName == 'login' ? 'active' : '' ?>" href="login.php">登入</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= $pageName == 'register' ? 'active' : '' ?>" href="register.php">註冊</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
