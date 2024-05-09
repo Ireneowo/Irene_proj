@@ -4,7 +4,7 @@ require __DIR__ . '/../config/04-16_pdo-content.php';
 
 $sql = "SELECT * FROM address_book LIMIT 3";
 
-# $stst = $pdo->query($sql);
+# $stat = $pdo->query($sql);
 # $rows = $stat->fetchAll();
 
 $rows = $pdo->query($sql)->fetchAll();

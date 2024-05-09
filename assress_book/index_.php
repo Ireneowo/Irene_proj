@@ -1,4 +1,8 @@
 <?php
+if (isset($_SESSION)) {
+    session_start();
+}
+
 $title = '首頁';
 $pageName = 'index_';
 ?>

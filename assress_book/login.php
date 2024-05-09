@@ -1,36 +1,40 @@
 <?php
-$title = '登入';
+if (!isset($_SESSION)) {
+  session_start();
+}
+if (isset($_SESSION['admin'])) {
+  header('Location: index_.php');
+  exit;
+}
+$title = "登入";
 $pageName = 'login';
-?>
 
+?>
 <?php include __DIR__ . '/parts/html-head.php' ?>
 <?php include __DIR__ . '/parts/navbar.php' ?>
-
 <style>
   form .mb-3 .form-text {
-    color: tomato;
+    color: red;
     font-weight: 800;
   }
 </style>
-
-
-<div class="container mt-5">
+<div class="container">
   <div class="row">
     <div class="col-6">
       <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">員工登入</h5>
-          <form name="form1" onsubmit="sendData(event)">
 
+        <div class="card-body">
+          <h5 class="card-title">登入</h5>
+          <form name="form1" onsubmit="sendData(event)">
             <div class="mb-3">
-              <label for="email" class="form-label">帳號</label>
+              <label for="email" class="form-label">Email</label>
               <input type="text" class="form-control" id="email" name="email">
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">密碼</label>
               <input type="password" class="form-control" id="password" name="password">
-            </div>
 
+            </div>
             <button type="submit" class="btn btn-primary">登入</button>
           </form>
         </div>
@@ -38,8 +42,7 @@ $pageName = 'login';
     </div>
   </div>
 </div>
-
-<!-- Modal bt 彈跳視窗-->
+<!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -54,8 +57,7 @@ $pageName = 'login';
         </div>
       </div>
       <div class="modal-footer">
-
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">繼續登入</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">繼續登入</button>
       </div>
     </div>
   </div>
@@ -63,6 +65,7 @@ $pageName = 'login';
 
 <?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
+
   const emailField = document.form1.email;
 
   function validateEmail(email) {
@@ -83,6 +86,7 @@ $pageName = 'login';
       .then(data => {
         console.log(data);
         if (data.success) {
+          location.href = 'index_.php';
         } else {
           myModal.show();
         }
@@ -90,6 +94,8 @@ $pageName = 'login';
       .catch(ex => console.log(ex))
   }
 
+
   const myModal = new bootstrap.Modal('#staticBackdrop')
+
 </script>
 <?php include __DIR__ . '/parts/html-foot.php' ?>
